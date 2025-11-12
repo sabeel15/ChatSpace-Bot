@@ -4,108 +4,128 @@
     <title>Chatbot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-      body{
-        font-family: Arial, Helvetica, sans-serif;
-        margin-top: 0px;
-        margin-bottom: 0px;
-      }
-      .send-button{
-        background-color: rgb(25, 135, 84);
-        color: white;
-        padding: 12px 20px;
-        margin-left: 10px;
-        border: none;
-        border-radius: 10px;
-        font-size: 15px;
-        cursor: pointer;
-      }
-
-      .chat-input{
-        padding: 12px 15px;
-        border-radius: 10px;
-        border-width: 1px;
-        font-size: 15px;
-
-        flex-grow: 1;
-      }
-
-      .chat-input-container{
-        display: flex;
-        margin-bottom: 60px;
-      }
-
-      .app-container{
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .chat-message-user{
-        display: flex;
-        justify-content: end;
-        align-items: start;
-      }
-
-      .chat-message-robot{
-        display: flex;
-        align-items: start;
-      }
-
-      .chat-message-text{
-        background-color: rgb(238, 238, 238);
-        padding: 15px 20px;
-        border-radius: 10px;
-        margin-right: 10px;
-        margin-left: 10px;
-        margin-bottom: 20px;
-        max-width: 300px;
-      }
-
-      .chat-message-profile{
-        width: 45px;
-      }
-
-      .chat-messages-container{
-        flex-grow: 1;
-        margin-top: 20px;
-        overflow: scroll;
-        scrollbar-width: none;
-     }
-
-     .welcome-message{
-      color: rgb(120, 120, 120);
-      text-align: center;
-      font-size: 20px;
-     }
-
-      .loading-spinner{
-        height: 40px;
-        margin: -15px;
-     }
-
-     @media (max-width: 600px) {
-  .app-container {
-    padding: 5px;
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
   }
-  .chat-input {
-    font-size: 14px;
-    padding: 10px;
-  }
+
   .send-button {
-    font-size: 14px;
-    padding: 10px 15px;
+    background-color: rgb(25, 135, 84);
+    color: white;
+    padding: 12px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
   }
+
+  .chat-input {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #eee;
+    margin-bottom: 60px;
+  }
+
+  .app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-message-user {
+    display: flex;
+    justify-content: end;
+    align-items: start;
+  }
+
+  .chat-message-robot {
+    display: flex;
+    align-items: start;
+  }
+
   .chat-message-text {
-    font-size: 14px;
-    padding: 10px 14px;
+    background-color: rgb(238, 238, 238);
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin: 0 10px 20px 10px;
+    max-width: 300px;
+    word-wrap: break-word;
   }
-}
-    </style>
+
+  .chat-message-profile {
+    width: 45px;
+    flex-shrink: 0;
+  }
+
+  .chat-messages-container {
+    flex-grow: 1;
+    margin-top: 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* smooth mobile scroll */
+    scrollbar-width: none;
+    max-height: 100%;
+  }
+
+  .welcome-message {
+    color: rgb(120, 120, 120);
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .loading-spinner {
+    height: 40px;
+    margin: -15px;
+  }
+
+  /* ✅ Mobile Responsive Adjustments */
+  @media (max-width: 600px) {
+    .app-container {
+      padding: 5px;
+    }
+
+    .chat-input {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    .send-button {
+      font-size: 14px;
+      padding: 10px 15px;
+    }
+
+    .chat-message-text {
+      font-size: 14px;
+      padding: 10px 14px;
+    }
+
+    .chat-message-profile {
+      width: 35px;
+    }
+
+    .chat-messages-container {
+      margin-top: 10px;
+    }
+  }
+</style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -172,7 +192,7 @@
        return(
         <div className="chat-input-container">
           <input 
-            placeholder="Send a message to chatbot"
+            placeholder="Send a message to Chatbot"
             size="30" 
             onChange = {saveInputText}
             onKeyDown={handleKeyDown}
